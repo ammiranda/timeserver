@@ -27,3 +27,7 @@ $(PLATFORMS):
 
 .PHONY: release
 release: windows linux darwin
+
+.PHONY: clean
+clean:
+	rm -rf release/

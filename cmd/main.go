@@ -1,6 +1,8 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	r := gin.Default()
@@ -10,5 +12,18 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	r.GET("/api/timestamp", func(c *gin.Context) {
+		
+		c.JSON(200, gin.H{
+			"unix": ,
+			"utc": ,
+		})
+	})
+
+	r.GET("/api/timestamp/:time", func(c *gin.Context) {
+
+	})
+
 	r.Run()
 }

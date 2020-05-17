@@ -2,12 +2,12 @@ package timestamp
 
 import (
 	"errors"
-	"regexp"
+	"strconv"
 	"time"
 )
 
 type Service interface {
-	ParseTime(string) (int, string, error)
+	ParseTime(string) (int64, string, error)
 }
 
 type service struct {}
@@ -16,32 +16,28 @@ func NewService() Service {
 	return &service{}
 }
 
-func (s *service) ParseTime(t string) (int, string, error) {
-	isDate, _ := checkDate(t)
-	if isDate {
-
+func (s *service) ParseTime(t string) (int64, string, error) {
+	timeObj, err := generateTimeObj(t)
+	if err != nil {
+		return 0, "", errors.New(err.Error())
 	}
 
-	isUnix, _ := checkUnix(t)
-	if isUnix {
-		int64(time.Nanosecond) * timeT.UnixNano() / int64(time.Millisecond)
-	}
+	unixSecs := timeObj.Unix()
+	dateUTC := timeObj.Format("2020-12-25")
+
+	return unixSecs, dateUTC, nil
 }
 
-func checkDate(s string) (bool, error) {
-	re, err := regexp.Compile("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)")
-	if err != nil {
-		return false, errors.New("regex compile failed")
+func generateTimeObj(s string) (time.Time, error) {
+	unixSecs, err := strconv.ParseInt(s, 10, 64)
+	if err == nil {
+		return time.Unix(unixSecs, 0), nil
 	}
 
-	return re.MatchString(s), nil
-}
-
-func checkUnix(s string) (bool, error) {
-	re, err := regexp.Compile("(\\d{13})?")
+	timeObj, err := time.Parse("2020-05-17", s)
 	if err != nil {
-		return false, errors.New("regex compile failed")
+		return time.Now(), errors.New("String not valid time value")
 	}
 
-	return re.MatchString(s), nil
+	return timeObj, nil
 }

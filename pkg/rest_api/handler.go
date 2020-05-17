@@ -20,7 +20,8 @@ func parseTime(t timestamp.Service) func(c *gin.Context) {
 		datetime := c.Param("datetime")
 		unixTime, dateTime, err := t.ParseTime(datetime)
 		if err != nil {
-
+			c.JSON(400, gin.H{"error": "Invalid Date"})
+			return
 		}
 
 		resp := response.TimeResponse{Unix: unixTime, UTC: dateTime}

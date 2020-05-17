@@ -2,8 +2,6 @@ openapi: "3.0.0"
 info:
   title: Time Server
   version: 1.0.0
-schemes:
-  - http
 paths:
   /api/timeserver/:
     get:
@@ -62,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#components/schemas/Error"
+                $ref: "#/components/schemas/Error"
         default:
           description: unexpected error
           content:

@@ -34,7 +34,7 @@ func generateTimeObj(s string) (time.Time, error) {
 		return time.Unix(unixSecs, 0), nil
 	}
 
-	timeObj, err := time.Parse("2020-05-17", s)
+	timeObj, err := time.Parse("2006-01-02", s)
 	if err != nil {
 		return time.Now(), errors.New("String not valid time value")
 	}

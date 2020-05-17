@@ -1,6 +1,7 @@
 package rest_api
 
 import (
+	"github.com/ammiranda/timeserver/pkg/rest_api/models/response"
 	"github.com/ammiranda/timeserver/pkg/timestamp"
 	"github.com/gin-gonic/gin"
 )
@@ -17,8 +18,13 @@ func Handler(t timestamp.Service) *gin.Engine {
 func parseTime(t timestamp.Service) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		datetime := c.Param("datetime")
-		 data, err := t.ParseTime(datetime)
+		unixTime, dateTime, err := t.ParseTime(datetime)
+		if err != nil {
 
-		 c.JSON(200, )
+		}
+
+		resp := response.TimeResponse{Unix: unixTime, UTC: dateTime}
+
+		c.JSON(200, resp)
 	}
 }

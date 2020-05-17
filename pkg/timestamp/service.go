@@ -33,6 +33,9 @@ func (s *service) ParseTime(t string) (int64, string, error) {
 }
 
 func generateTimeObj(s string) (time.Time, error) {
+	if s == "" {
+		return time.Now(), nil
+	}
 	unixSecs, err := strconv.ParseInt(s, 10, 64)
 	if err == nil {
 		return time.Unix(unixSecs, 0), nil

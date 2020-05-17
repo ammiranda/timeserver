@@ -22,11 +22,19 @@ func TestGenerateTimeObj_Unix_Valid(t *testing.T) {
 func TestGenerateTimeObj_DateStr_Valid(t *testing.T) {
 	dateTime := "2020-12-25"
 
-	expectedTimeObj, err := time.Parse("2006-01-02", dateTime)
+	expectedTimeObj, err := time.Parse(dateTimeLayout, dateTime)
 	require.NoError(t, err)
 
 	actualTimeObj, err := generateTimeObj(dateTime)
 
 	require.NoError(t, err)
 	require.Equal(t, expectedTimeObj, actualTimeObj)
+}
+
+func TestGenerateTimeObj_ParseError(t *testing.T) {
+	dateTime := "2030040f-f9a9a"
+
+	_, err := generateTimeObj(dateTime)
+
+	require.Error(t, err)
 }

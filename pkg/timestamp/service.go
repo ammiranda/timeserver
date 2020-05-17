@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+const (
+	dateTimeLayout = "2006-01-02"
+)
+
 type Service interface {
 	ParseTime(string) (int64, string, error)
 }
@@ -23,7 +27,7 @@ func (s *service) ParseTime(t string) (int64, string, error) {
 	}
 
 	unixSecs := timeObj.Unix()
-	dateUTC := timeObj.Format("2020-12-25")
+	dateUTC := timeObj.Format(dateTimeLayout)
 
 	return unixSecs, dateUTC, nil
 }
@@ -34,7 +38,7 @@ func generateTimeObj(s string) (time.Time, error) {
 		return time.Unix(unixSecs, 0), nil
 	}
 
-	timeObj, err := time.Parse("2006-01-02", s)
+	timeObj, err := time.Parse(dateTimeLayout, s)
 	if err != nil {
 		return time.Now(), errors.New("String not valid time value")
 	}

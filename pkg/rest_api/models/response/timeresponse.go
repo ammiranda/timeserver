@@ -1,6 +1,6 @@
 package response
 
 type TimeResponse struct {
-	UTC string
-	Unix int
+	UTC string  `json:"utc"`
+	Unix int	`json:"unix"`
 }

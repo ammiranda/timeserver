@@ -2,6 +2,7 @@ openapi: 3.0.0
 info:
   title: Time Server
   version: 1.0.0
+  description: Time server that returns unix and UTC timestamps for the inputted date/unix time or the current time if not provided
 paths:
   /api/timeserver/:
     get:
@@ -13,6 +14,8 @@ paths:
             200 response
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/TimeResponse'
               examples:
                 response:
                   value:
@@ -25,6 +28,8 @@ paths:
             400 response
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
               examples:
                 response:
                   value:
@@ -39,7 +44,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /api/timeserver/{dateTime}:
     get:
-      summary: Get time for date inputted
+      summary: Get inputted time in UTC and Unix
       operationId: getTimeWInputv1
       parameters:
         - name: dateTime

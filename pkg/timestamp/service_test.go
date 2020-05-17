@@ -31,6 +31,15 @@ func TestGenerateTimeObj_DateStr_Valid(t *testing.T) {
 	require.Equal(t, expectedTimeObj, actualTimeObj)
 }
 
+func TestGenerateTimeObj_NoInput_Valid(t *testing.T) {
+	expectedTime := time.Now()
+	actualTime, err := generateTimeObj("")
+
+	require.NoError(t, err)
+
+	require.Equal(t, expectedTime.Format(dateTimeLayout), actualTime.Format(dateTimeLayout))
+}
+
 func TestGenerateTimeObj_ParseError(t *testing.T) {
 	dateTime := "2030040f-f9a9a"
 

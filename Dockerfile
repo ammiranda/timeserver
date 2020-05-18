@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:latest-alpine
 
 LABEL maintainer="Alexander Miranda <alexandermichaelmiranda@gmail.com>"
 

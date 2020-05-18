@@ -1,3 +1,4 @@
+.idea
 .git
 .github
 makefile
@@ -5,3 +6,4 @@ makefile
 api/
 scripts/
 release/
+

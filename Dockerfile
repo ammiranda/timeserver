@@ -1,4 +1,4 @@
-FROM golang:1.14-alpine
+FROM golang:1.14-alpine as builder
 
 LABEL maintainer="Alexander Miranda <alexandermichaelmiranda@gmail.com>"
 
@@ -11,6 +11,11 @@ RUN go mod download
 COPY . .
 
 RUN go build -o main /app/cmd/server/main.go
+
+FROM alpine
+
+WORKDIR /app
+COPY --from=builder /app .
 
 EXPOSE 8080
 

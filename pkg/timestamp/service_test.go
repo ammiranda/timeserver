@@ -47,3 +47,23 @@ func TestGenerateTimeObj_ParseError(t *testing.T) {
 
 	require.Error(t, err)
 }
+
+func TestParseTime_InvalidDatetime_Errors(t *testing.T) {
+	timeService := NewService()
+	dateTime := "kdkafkjak"
+	_, _, err := timeService.ParseTime(dateTime)
+	require.Error(t, err)
+}
+
+func TestParseTime_ValidUnix_OK(t *testing.T) {
+	timeService := NewService()
+	unixTime := int64(10001664000)
+	unixTimeStr := fmt.Sprintf("%d", unixTime)
+	expectedTime := time.Unix(unixTime / 1000, 0)
+	expectedDateTimeStr := expectedTime.Format(dateTimeLayoutOutput)
+	
+	unixMS, dateTimeUTC, err := timeService.ParseTime(unixTimeStr)
+	require.NoError(t, err)
+	require.Equal(t, unixTime, unixMS)
+	require.Equal(t, dateTimeUTC, expectedDateTimeStr)
+}

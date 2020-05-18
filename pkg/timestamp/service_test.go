@@ -12,7 +12,7 @@ func TestGenerateTimeObj_Unix_Valid(t *testing.T) {
 	unixTime := int64(1589735673000)
 	unixStr := fmt.Sprintf("%d", unixTime)
 
-	expectedTimeObj := time.Unix(unixTime, 0)
+	expectedTimeObj := time.Unix(unixTime / 1000, 0)
 	actualTimeObj, err := generateTimeObj(unixStr)
 
 	require.NoError(t, err)

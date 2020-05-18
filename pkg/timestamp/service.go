@@ -27,17 +27,18 @@ func (s *service) ParseTime(t string) (int64, string, error) {
 		return 0, "", errors.New(err.Error())
 	}
 
-	unixSecs := timeObj.Unix()
+	unixMillisecs := timeObj.UnixNano() / int64(time.Millisecond)
 	dateUTC := timeObj.Format(dateTimeLayoutOutput)
 
-	return unixSecs, dateUTC, nil
+	return unixMillisecs, dateUTC, nil
 }
 
 func generateTimeObj(s string) (time.Time, error) {
 	if s == "" {
 		return time.Now(), nil
 	}
-	unixSecs, err := strconv.ParseInt(s, 10, 64)
+	unixMillisecs, err := strconv.ParseInt(s, 10, 64)
+	unixSecs := unixMillisecs / 1000
 	if err == nil {
 		return time.Unix(unixSecs, 0), nil
 	}

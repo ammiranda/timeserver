@@ -1,6 +1,6 @@
 ### Time Server
 
-https://github.com/ammiranda/timeserver/workflows/Test/badge.svg
+<img src="https://github.com/ammiranda/timeserver/workflows/Test/badge.svg" />
 
 #### Background
 

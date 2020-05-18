@@ -61,7 +61,7 @@ func TestParseTime_ValidUnix_OK(t *testing.T) {
 	unixTimeStr := fmt.Sprintf("%d", unixTime)
 	expectedTime := time.Unix(unixTime / 1000, 0)
 	expectedDateTimeStr := expectedTime.Format(dateTimeLayoutOutput)
-	
+
 	unixMS, dateTimeUTC, err := timeService.ParseTime(unixTimeStr)
 	require.NoError(t, err)
 	require.Equal(t, unixTime, unixMS)

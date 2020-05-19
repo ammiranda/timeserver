@@ -8,7 +8,7 @@ import (
 func main() {
 	s := timestamp.NewService()
 
-	router := rest_api.Handler(s)
+	router := rest_api.NewRouter(s)
 
 	router.Run()
 }

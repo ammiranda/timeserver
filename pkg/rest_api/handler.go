@@ -6,7 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Handler(t timestamp.Service) *gin.Engine {
+var errorResponse = response.TimeResponseError{ Error: "Invalid Date" }
+
+func NewRouter(t timestamp.Service) *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/api/timestamp", parseTime(t))
@@ -20,7 +22,7 @@ func parseTime(t timestamp.Service) func(c *gin.Context) {
 		datetime := c.Param("datetime")
 		unixTime, dateTime, err := t.ParseTime(datetime)
 		if err != nil {
-			c.JSON(400, gin.H{"error": "Invalid Date"})
+			c.JSON(400, errorResponse)
 			return
 		}
 

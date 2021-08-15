@@ -8,7 +8,7 @@ import (
 
 const (
 	dateTimeLayoutInput  = "2006-01-02"
-	dateTimeLayoutOutput = "Mon, 2 Jan 2006 15:04:05 (GMT)"
+	dateTimeLayoutOutput = "Mon, 2 Jan 2006 15:04:05 GMT"
 )
 
 type Service interface {

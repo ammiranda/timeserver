@@ -11,8 +11,8 @@ var errorResponse = response.TimeResponseError{ Error: "Invalid Date" }
 func NewRouter(t timestamp.Service) *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/api/timestamp", parseTime(t))
-	r.GET("/api/timestamp/:datetime", parseTime(t))
+	r.GET("/api/", parseTime(t))
+	r.GET("/api/:datetime", parseTime(t))
 
 	return r
 }

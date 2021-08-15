@@ -17,7 +17,7 @@ func TestTimeStampRoute_NoTime(t *testing.T) {
 	r := NewRouter(s)
 	w := httptest.NewRecorder()
 
-	req, _ := http.NewRequest("GET", "/api/timestamp", nil)
+	req, _ := http.NewRequest("GET", "/api/", nil)
 	r.ServeHTTP(w, req)
 
 	resp := response.TimeResponse{}
@@ -32,7 +32,7 @@ func TestTimeStampRoute_DateTimeStr_Valid(t *testing.T) {
 	r := NewRouter(s)
 	w := httptest.NewRecorder()
 
-	getURL := fmt.Sprintf("/api/timestamp/%s", "2015-12-25")
+	getURL := fmt.Sprintf("/api/%s", "2015-12-25")
 
 	req, _ := http.NewRequest("GET", getURL, nil)
 	r.ServeHTTP(w, req)
@@ -46,7 +46,7 @@ func TestTimeStampRoute_With_Invalid_Date_Bad_Request(t *testing.T) {
 	r := NewRouter(s)
 	w := httptest.NewRecorder()
 
-	req, _ := http.NewRequest("GET", "/api/timestamp/kadkfja", nil)
+	req, _ := http.NewRequest("GET", "/api/kadkfja", nil)
 	r.ServeHTTP(w, req)
 
 	resp := response.TimeResponseError{}

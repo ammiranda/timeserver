@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var errorResponse = response.TimeResponseError{ Error: "Invalid Date" }
+var errorResponse = response.TimeResponseError{Error: "Invalid Date"}
 
 func NewRouter(t timestamp.Service) *gin.Engine {
 	r := gin.Default()

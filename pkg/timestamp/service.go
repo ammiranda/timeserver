@@ -7,15 +7,15 @@ import (
 )
 
 const (
-	dateTimeLayoutInput = "2006-01-02"
-	dateTimeLayoutOutput = "Mon, 2 Jan 2006 15:04:05 MST"
+	dateTimeLayoutInput  = "2006-01-02"
+	dateTimeLayoutOutput = "Mon, 2 Jan 2006 15:04:05 (GMT)"
 )
 
 type Service interface {
 	ParseTime(string) (int64, string, error)
 }
 
-type service struct {}
+type service struct{}
 
 func NewService() Service {
 	return &service{}

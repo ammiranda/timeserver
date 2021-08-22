@@ -11,6 +11,15 @@ $(GOMETALINTER):
 	go get -u github.com/alecthomas/gometalinter
 	gometalinter --install &> /dev/null
 
+dev-up:
+	docker-compose -f ./docker-compose.yml up -d
+
+dev-down:
+	docker-compose -f ./docker-compose.yml down
+
+dev-clean: dev-down
+	docker-compose -f ./docker-compose.yml rm -f
+
 .PHONY: lint
 lint: $(GOMETALINTER)
 	gometalinter ./... --vendor

@@ -35,7 +35,7 @@ func (s *service) ParseTime(t string) (int64, string, error) {
 
 func generateTimeObj(s string) (time.Time, error) {
 	if s == "" {
-		return time.Now(), nil
+		return time.Now().UTC(), nil
 	}
 	unixMillisecs, err := strconv.ParseInt(s, 10, 64)
 	unixSecs := unixMillisecs / 1000
@@ -45,7 +45,7 @@ func generateTimeObj(s string) (time.Time, error) {
 
 	timeObj, err := time.Parse(dateTimeLayoutInput, s)
 	if err != nil {
-		return time.Now(), errors.New("String not valid time value")
+		return time.Now().UTC(), errors.New("String not valid time value")
 	}
 
 	return timeObj, nil

@@ -9,10 +9,12 @@ import (
 var errorResponse = response.TimeResponseError{Error: "Invalid Date"}
 
 func NewRouter(t timestamp.Service) *gin.Engine {
-	r := gin.Default()
+	r := gin.New()
 
-	r.GET("/api/", parseTime(t))
-	r.GET("/api/:datetime", parseTime(t))
+	r.Use(gin.Recovery())
+
+	r.GET("/api/", cors, parseTime(t))
+	r.GET("/api/:datetime", cors, parseTime(t))
 
 	return r
 }
@@ -30,4 +32,9 @@ func parseTime(t timestamp.Service) func(c *gin.Context) {
 
 		c.JSON(200, resp)
 	}
+}
+
+func cors(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Headers", "access-control-allow-origin, access-control-allow-headers")
 }
